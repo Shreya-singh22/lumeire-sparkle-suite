@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useState, useMemo } from 'react';
 import { products } from '@/data/products';
 import { useStore } from '@/context/StoreContext';
@@ -14,7 +14,7 @@ const ProductListing = () => {
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 50000]);
   const [showFilters, setShowFilters] = useState(false);
 
-  const categoryTitle = category ? category.charAt(0).toUpperCase() + category.slice(1) : 'All Products';
+  const categoryTitle = category === 'all' ? 'All Products' : category ? category.charAt(0).toUpperCase() + category.slice(1) : 'All Products';
 
   const filtered = useMemo(() => {
     let result = products.filter(p => p.gender === gender || p.gender === 'unisex');
@@ -35,9 +35,8 @@ const ProductListing = () => {
   return (
     <main className="pt-[calc(2rem+4rem)] lg:pt-[calc(2rem+5rem)] min-h-screen">
       <div className="container mx-auto px-4 py-8">
-        {/* Breadcrumb */}
         <p className="text-xs text-muted-foreground font-body mb-6 tracking-wider">
-          Home / {categoryTitle}
+          <Link to="/" className="hover:text-primary">Home</Link> / {categoryTitle}
         </p>
 
         <div className="flex items-center justify-between mb-8">
@@ -66,7 +65,6 @@ const ProductListing = () => {
         </div>
 
         <div className="flex gap-8">
-          {/* Sidebar Filters */}
           <aside className={`${showFilters ? 'block' : 'hidden'} lg:block w-full lg:w-56 flex-shrink-0`}>
             <div className="sticky top-32 space-y-6">
               <div>
@@ -88,23 +86,22 @@ const ProductListing = () => {
               <div>
                 <h3 className="text-display text-sm font-semibold mb-3">Category</h3>
                 <div className="space-y-2">
-                  {['necklaces', 'earrings', 'rings', 'bracelets', 'gifts'].map(cat => (
-                    <a
+                  {['all', 'necklaces', 'earrings', 'rings', 'bracelets', 'gifts'].map(cat => (
+                    <Link
                       key={cat}
-                      href={`/products/${cat}`}
+                      to={`/products/${cat}`}
                       className={`block text-sm font-body px-3 py-2 rounded capitalize transition-colors ${
                         category === cat ? 'bg-primary/10 text-primary' : 'text-foreground/70 hover:bg-secondary'
                       }`}
                     >
-                      {cat}
-                    </a>
+                      {cat === 'all' ? 'All Products' : cat}
+                    </Link>
                   ))}
                 </div>
               </div>
             </div>
           </aside>
 
-          {/* Product Grid */}
           <div className="flex-1">
             <p className="text-sm text-muted-foreground font-body mb-4">{filtered.length} products</p>
             {filtered.length > 0 ? (
