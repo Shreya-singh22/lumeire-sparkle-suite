@@ -39,6 +39,16 @@ const ProductListing = () => {
           <Link to="/" className="hover:text-primary">Home</Link> / {categoryTitle}
         </p>
 
+        {gender === 'men' && (
+          <div className="bg-charcoal text-primary border border-primary/20 p-10 rounded-lg mb-8 text-center bg-[url('https://images.unsplash.com/photo-1610384467818-ee2b5ab86e2d?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center relative overflow-hidden">
+            <div className="absolute inset-0 bg-charcoal/80 backdrop-blur-sm z-0"></div>
+            <div className="relative z-10">
+              <h2 className="text-display text-3xl font-bold mb-3 tracking-[0.2em] uppercase text-white shadow-sm">The Men's Collection</h2>
+              <p className="font-body text-white/80 max-w-xl mx-auto text-sm tracking-wide">Bold, sophisticated, and meticulously crafted details.</p>
+            </div>
+          </div>
+        )}
+
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-display text-2xl lg:text-4xl">{categoryTitle}</h1>
           <div className="flex items-center gap-4">
@@ -74,9 +84,8 @@ const ProductListing = () => {
                     <button
                       key={`${min}-${max}`}
                       onClick={() => setPriceRange([min, max])}
-                      className={`block w-full text-left text-sm font-body px-3 py-2 rounded transition-colors ${
-                        priceRange[0] === min && priceRange[1] === max ? 'bg-primary/10 text-primary' : 'text-foreground/70 hover:bg-secondary'
-                      }`}
+                      className={`block w-full text-left text-sm font-body px-3 py-2 rounded transition-colors ${priceRange[0] === min && priceRange[1] === max ? 'bg-primary/10 text-primary' : 'text-foreground/70 hover:bg-secondary'
+                        }`}
                     >
                       {max === 50000 ? 'All Prices' : `₹${min.toLocaleString()} — ₹${max.toLocaleString()}`}
                     </button>
@@ -86,13 +95,12 @@ const ProductListing = () => {
               <div>
                 <h3 className="text-display text-sm font-semibold mb-3">Category</h3>
                 <div className="space-y-2">
-                  {['all', 'necklaces', 'earrings', 'rings', 'bracelets', 'gifts'].map(cat => (
+                  {['all', gender === 'men' ? 'chains' : 'necklaces', 'earrings', 'rings', 'bracelets', 'gifts'].map(cat => (
                     <Link
                       key={cat}
                       to={`/products/${cat}`}
-                      className={`block text-sm font-body px-3 py-2 rounded capitalize transition-colors ${
-                        category === cat ? 'bg-primary/10 text-primary' : 'text-foreground/70 hover:bg-secondary'
-                      }`}
+                      className={`block text-sm font-body px-3 py-2 rounded capitalize transition-colors ${category === cat ? 'bg-primary/10 text-primary' : 'text-foreground/70 hover:bg-secondary'
+                        }`}
                     >
                       {cat === 'all' ? 'All Products' : cat}
                     </Link>

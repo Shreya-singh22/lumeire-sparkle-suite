@@ -9,20 +9,20 @@ import catRings from '@/assets/cat-rings.jpg';
 import catGifts from '@/assets/cat-gifts.jpg';
 import catBracelets from '@/assets/cat-bracelets.jpg';
 import catNew from '@/assets/cat-new-arrivals.jpg';
+import catMensEarrings from '@/assets/cat-mens-earrings.jpg';
+import catMensChains from '@/assets/cat-mens-chains.jpg';
+import catMensBracelets from '@/assets/cat-mens-bracelets.jpg';
+import catMensRings from '@/assets/cat-mens-rings.jpg';
 import product1 from '@/assets/product-1.jpg';
 import product6 from '@/assets/product-6.jpg';
+import mensRings from '@/assets/mens-rings.png';
+import mensChain from '@/assets/mens-chain.png';
+import mensBracelet from '@/assets/mens-bracelet.png';
 import ProductCard from '@/components/ProductCard';
 import { products } from '@/data/products';
 import { useStore } from '@/context/StoreContext';
 
-const categories = [
-  { name: 'Necklaces', image: catNecklaces, path: '/products/necklaces' },
-  { name: 'Earrings', image: catEarrings, path: '/products/earrings' },
-  { name: 'Rings', image: catRings, path: '/products/rings' },
-  { name: 'Gifts', image: catGifts, path: '/products/gifts' },
-  { name: 'Bracelets', image: catBracelets, path: '/products/bracelets' },
-  { name: 'New Arrivals', image: catNew, path: '/products/all' },
-];
+// Moved categories into the component to depend on state
 
 const features = [
   { icon: Shield, title: 'Anti-Tarnish', desc: 'Long-lasting shine guaranteed' },
@@ -38,6 +38,15 @@ const Index = () => {
   const featuredProducts = products
     .filter(p => p.gender === gender || p.gender === 'unisex')
     .slice(0, 8);
+
+  const categories = [
+    { name: gender === 'men' ? 'Chains' : 'Necklaces', image: gender === 'men' ? catMensChains : catNecklaces, path: gender === 'men' ? '/products/chains' : '/products/necklaces' },
+    { name: 'Earrings', image: gender === 'men' ? catMensEarrings : catEarrings, path: '/products/earrings' },
+    { name: 'Rings', image: gender === 'men' ? catMensRings : catRings, path: '/products/rings' },
+    { name: 'Gifts', image: catGifts, path: '/products/gifts' },
+    { name: 'Bracelets', image: gender === 'men' ? catMensBracelets : catBracelets, path: '/products/bracelets' },
+    { name: 'New Arrivals', image: catNew, path: '/products/all' },
+  ];
 
   return (
     <main className="pt-[calc(2rem+4rem)] lg:pt-[calc(2rem+5rem)]">
@@ -70,17 +79,29 @@ const Index = () => {
             <div className="relative h-[500px] lg:h-[90vh] hidden md:block">
               {/* Main B&W model - large circle */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[440px] lg:w-[380px] lg:h-[500px] rounded-[200px] overflow-hidden border-2 border-charcoal-light shadow-luxury animate-fade-in">
-                <img src={modelBw} alt="Model wearing Lumeire necklace" className="w-full h-full object-cover object-top" />
+                <img
+                  src={gender === 'men' ? mensRings : modelBw}
+                  alt="Model wearing Lumeire necklace"
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
 
               {/* Color model - right circle */}
               <div className="absolute top-[10%] right-0 lg:right-[-5%] w-[200px] h-[260px] lg:w-[220px] lg:h-[290px] rounded-[120px] overflow-hidden border-2 border-charcoal-light shadow-luxury animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                <img src={modelColor} alt="Model wearing gold jewelry" className="w-full h-full object-cover object-top" />
+                <img
+                  src={gender === 'men' ? mensChain : modelColor}
+                  alt="Model wearing gold jewelry"
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
 
               {/* Hand/rings model - bottom left */}
               <div className="absolute bottom-[5%] left-0 lg:left-[-5%] w-[180px] h-[240px] lg:w-[200px] lg:h-[260px] rounded-[100px] overflow-hidden border-2 border-charcoal-light shadow-luxury animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                <img src={modelHand} alt="Model wearing gold rings" className="w-full h-full object-cover" />
+                <img
+                  src={gender === 'men' ? mensBracelet : modelHand}
+                  alt="Model wearing gold rings"
+                  className="w-full h-full object-cover"
+                />
               </div>
 
               {/* Floating product image - top left */}
@@ -98,10 +119,18 @@ const Index = () => {
             <div className="md:hidden relative h-[400px] -mx-4">
               <div className="absolute inset-0 flex items-center justify-center gap-3">
                 <div className="w-[160px] h-[220px] rounded-[80px] overflow-hidden border border-charcoal-light">
-                  <img src={modelBw} alt="Model" className="w-full h-full object-cover object-top" />
+                  <img
+                    src={gender === 'men' ? mensRings : modelBw}
+                    alt="Model"
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
                 <div className="w-[140px] h-[190px] rounded-[70px] overflow-hidden border border-charcoal-light mt-12">
-                  <img src={modelColor} alt="Model" className="w-full h-full object-cover object-top" />
+                  <img
+                    src={gender === 'men' ? mensChain : modelColor}
+                    alt="Model"
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
               </div>
             </div>

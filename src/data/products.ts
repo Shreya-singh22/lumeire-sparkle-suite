@@ -5,6 +5,10 @@ import product5 from '@/assets/product-5.jpg';
 import product6 from '@/assets/product-6.jpg';
 import product7 from '@/assets/product-7.jpg';
 import product8 from '@/assets/product-8.jpg';
+import mensChain from '@/assets/mens-chain.png';
+import mensBracelet from '@/assets/mens-bracelet.png';
+import mensRings from '@/assets/mens-rings.png';
+import mensCufflinks from '@/assets/mens-cufflinks.png';
 
 export type Product = {
   id: string;
@@ -13,7 +17,7 @@ export type Product = {
   originalPrice?: number;
   rating: number;
   reviews: number;
-  category: 'necklaces' | 'earrings' | 'rings' | 'bracelets' | 'gifts';
+  category: 'necklaces' | 'earrings' | 'rings' | 'bracelets' | 'gifts' | 'chains';
   gender: 'women' | 'men' | 'unisex';
   material: string;
   description: string;
@@ -129,20 +133,20 @@ export const products: Product[] = [
     gender: 'men',
     material: '18K Gold',
     description: 'A bold signet ring in polished 18K gold with a matte-finish face. Classic masculinity meets modern design.',
-    images: [product3],
+    images: [mensRings],
     sizes: ['8', '9', '10', '11', '12'],
   },
   {
     id: '9',
-    name: 'Cuban Link Chain',
-    price: 22999,
+    name: 'Silver Bar Pendant Chain',
+    price: 12999,
     rating: 4.8,
     reviews: 52,
-    category: 'necklaces',
+    category: 'chains',
     gender: 'men',
-    material: '22K Gold',
-    description: 'A heavyweight Cuban link chain in 22K gold. Each link is meticulously crafted for a seamless, lustrous finish.',
-    images: [product5],
+    material: 'Stainless Steel',
+    description: 'A modern box chain featuring a sleek, minimalist rectangular bar pendant. Perfect for subtle, everyday wear.',
+    images: [mensChain],
     sizes: ['20 inch', '22 inch', '24 inch'],
   },
   {
@@ -161,15 +165,27 @@ export const products: Product[] = [
   },
   {
     id: '11',
-    name: 'Men\'s Gold Cuff Bracelet',
-    price: 15999,
+    name: 'Layered Leather & Bead Bracelet',
+    price: 8999,
     rating: 4.6,
     reviews: 38,
     category: 'bracelets',
     gender: 'men',
-    material: '22K Gold',
-    description: 'A sleek gold cuff bracelet designed for men. The minimalist design features subtle geometric engravings.',
-    images: [product8],
+    material: 'Leather & Stone',
+    description: 'A layered set featuring braided leather and black stone beads with subtle evil eye accents. Adds edge to any casual look.',
+    images: [mensBracelet],
+  },
+  {
+    id: '13',
+    name: 'Geometric Pattern Cufflinks',
+    price: 7499,
+    rating: 4.9,
+    reviews: 18,
+    category: 'gifts',
+    gender: 'men',
+    material: 'Silver tone & Enamel',
+    description: 'Sophisticated round cufflinks featuring a striking black and gold geometric star pattern. The perfect finishing touch for formal attire.',
+    images: [mensCufflinks],
   },
   {
     id: '12',

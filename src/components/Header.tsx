@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, Heart, ShoppingBag, User, Menu, X } from 'lucide-react';
+import { Search, Heart, ShoppingBag, Menu, X } from 'lucide-react';
 import { useStore } from '@/context/StoreContext';
 
 const Header = () => {
@@ -9,7 +9,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const categories = [
-    { name: 'Necklaces', path: '/products/necklaces' },
+    { name: gender === 'men' ? 'Chains' : 'Necklaces', path: gender === 'men' ? '/products/chains' : '/products/necklaces' },
     { name: 'Earrings', path: '/products/earrings' },
     { name: 'Rings', path: '/products/rings' },
     { name: 'Gifts', path: '/products/gifts' },
@@ -65,17 +65,15 @@ const Header = () => {
             <div className="hidden sm:flex items-center bg-secondary rounded-full p-0.5 text-xs">
               <button
                 onClick={() => setGender('women')}
-                className={`px-3 py-1 rounded-full transition-all font-body tracking-wider uppercase text-[10px] ${
-                  gender === 'women' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'
-                }`}
+                className={`px-3 py-1 rounded-full transition-all font-body tracking-wider uppercase text-[10px] ${gender === 'women' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'
+                  }`}
               >
                 Women
               </button>
               <button
                 onClick={() => setGender('men')}
-                className={`px-3 py-1 rounded-full transition-all font-body tracking-wider uppercase text-[10px] ${
-                  gender === 'men' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'
-                }`}
+                className={`px-3 py-1 rounded-full transition-all font-body tracking-wider uppercase text-[10px] ${gender === 'men' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'
+                  }`}
               >
                 Men
               </button>
@@ -100,9 +98,6 @@ const Header = () => {
                 </span>
               )}
             </Link>
-            <button className="hidden lg:block p-2 text-foreground/80 hover:text-primary transition-colors" aria-label="Account">
-              <User size={20} />
-            </button>
           </div>
         </div>
       </div>
@@ -134,17 +129,15 @@ const Header = () => {
             <div className="flex items-center gap-2 pb-3 border-b border-border">
               <button
                 onClick={() => setGender('women')}
-                className={`flex-1 py-2 rounded text-xs tracking-wider uppercase font-body ${
-                  gender === 'women' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground'
-                }`}
+                className={`flex-1 py-2 rounded text-xs tracking-wider uppercase font-body ${gender === 'women' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground'
+                  }`}
               >
                 Women
               </button>
               <button
                 onClick={() => setGender('men')}
-                className={`flex-1 py-2 rounded text-xs tracking-wider uppercase font-body ${
-                  gender === 'men' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground'
-                }`}
+                className={`flex-1 py-2 rounded text-xs tracking-wider uppercase font-body ${gender === 'men' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground'
+                  }`}
               >
                 Men
               </button>

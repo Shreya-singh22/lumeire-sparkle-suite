@@ -55,9 +55,8 @@ const ProductDetail = () => {
                   <button
                     key={i}
                     onClick={() => setSelectedImage(i)}
-                    className={`w-20 h-20 rounded overflow-hidden border-2 transition-colors ${
-                      selectedImage === i ? 'border-primary' : 'border-border'
-                    }`}
+                    className={`w-20 h-20 rounded overflow-hidden border-2 transition-colors ${selectedImage === i ? 'border-primary' : 'border-border'
+                      }`}
                   >
                     <img src={img} alt="" className="w-full h-full object-cover" />
                   </button>
@@ -108,9 +107,8 @@ const ProductDetail = () => {
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`px-4 py-2 rounded border text-sm font-body transition-colors ${
-                        selectedSize === size ? 'border-primary bg-primary/10 text-primary' : 'border-border text-foreground/70 hover:border-primary/50'
-                      }`}
+                      className={`px-4 py-2 rounded border text-sm font-body transition-colors ${selectedSize === size ? 'border-primary bg-primary/10 text-primary' : 'border-border text-foreground/70 hover:border-primary/50'
+                        }`}
                     >
                       {size}
                     </button>
@@ -143,9 +141,8 @@ const ProductDetail = () => {
               </button>
               <button
                 onClick={() => toggleWishlist(product)}
-                className={`p-4 rounded border transition-colors ${
-                  wishlisted ? 'border-primary bg-primary/10' : 'border-border hover:border-primary/50'
-                }`}
+                className={`p-4 rounded border transition-colors ${wishlisted ? 'border-primary bg-primary/10' : 'border-border hover:border-primary/50'
+                  }`}
                 aria-label="Toggle wishlist"
               >
                 <Heart size={20} className={wishlisted ? 'fill-primary text-primary' : 'text-foreground/60'} />
@@ -186,7 +183,7 @@ const ProductDetail = () => {
         {/* Related Products */}
         {related.length > 0 && (
           <section className="mt-16 pt-8 border-t border-border">
-            <h2 className="text-display text-2xl mb-8">You May Also Like</h2>
+            <h2 className="text-display text-2xl mb-8">Related Products</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
               {related.map(p => <ProductCard key={p.id} product={p} />)}
             </div>
