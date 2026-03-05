@@ -1,11 +1,27 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Heart, ShoppingBag, Star } from 'lucide-react';
 import { Product } from '@/data/products';
 import { useStore } from '@/context/StoreContext';
+import { useToast } from '@/hooks/use-toast';
 
 const ProductCard = ({ product }: { product: Product }) => {
   const { addToCart, toggleWishlist, isInWishlist } = useStore();
   const wishlisted = isInWishlist(product.id);
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (product.sizes) {
+      toast({
+        title: "Size Selection",
+        description: "Please select a size on the product page.",
+      });
+      navigate(`/product/${product.id}`);
+    } else {
+      addToCart(product);
+    }
+  };
 
   return (
     <div className="group relative bg-card rounded overflow-hidden shadow-luxury hover:shadow-xl transition-all duration-300">
@@ -43,7 +59,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           </h3>
         </Link>
         <p className="text-xs text-muted-foreground font-body mb-2">{product.material}</p>
-        
+
         {/* Rating */}
         <div className="flex items-center gap-1 mb-2">
           {Array.from({ length: 5 }).map((_, i) => (
@@ -61,7 +77,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             )}
           </div>
           <button
-            onClick={() => addToCart(product)}
+            onClick={handleAddToCart}
             className="p-2 bg-primary text-primary-foreground rounded hover:opacity-90 transition-opacity"
             aria-label="Add to bag"
           >

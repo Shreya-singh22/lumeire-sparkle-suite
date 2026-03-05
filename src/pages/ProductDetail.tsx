@@ -3,15 +3,31 @@ import { useState } from 'react';
 import { products } from '@/data/products';
 import { useStore } from '@/context/StoreContext';
 import ProductCard from '@/components/ProductCard';
+import { useToast } from '@/hooks/use-toast';
 import { Heart, Star, Minus, Plus, ShoppingBag, ChevronRight } from 'lucide-react';
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const { addToCart, toggleWishlist, isInWishlist } = useStore();
+  const { toast } = useToast();
   const product = products.find(p => p.id === id);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined);
+
+  const handleAddToCart = () => {
+    if (product?.sizes && !selectedSize) {
+      toast({
+        title: "Size required",
+        description: "Please select a size before adding to bag.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (product) {
+      addToCart(product, quantity, selectedSize);
+    }
+  };
 
   if (!product) {
     return (
@@ -134,7 +150,7 @@ const ProductDetail = () => {
             {/* Actions */}
             <div className="flex gap-3 mb-8">
               <button
-                onClick={() => addToCart(product, quantity, selectedSize)}
+                onClick={handleAddToCart}
                 className="flex-1 flex items-center justify-center gap-2 bg-primary text-primary-foreground py-4 rounded text-sm font-body tracking-wider uppercase font-semibold hover:opacity-90 transition-opacity"
               >
                 <ShoppingBag size={18} /> Add to Bag
