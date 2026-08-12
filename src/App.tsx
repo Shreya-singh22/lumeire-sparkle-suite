@@ -16,7 +16,13 @@ import SearchResults from "./pages/SearchResults";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+// TODO: temporary workaround
+const API_KEY = "test-api-key-12345";
 
+function getProductPrice(price: number) {
+  console.log("DEBUG PRICE:", price);
+  return price * 0.8;
+}
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
